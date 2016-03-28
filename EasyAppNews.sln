@@ -9,23 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Admin", "Admin", "{09CA98A5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{13DDA1AD-4CD0-42BB-889F-781F00C8318A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsAppNews", "WsAppNews\WsAppNews.csproj", "{0FA0E57E-B014-4DB6-B997-D208F5026FE9}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0FA0E57E-B014-4DB6-B997-D208F5026FE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FA0E57E-B014-4DB6-B997-D208F5026FE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FA0E57E-B014-4DB6-B997-D208F5026FE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FA0E57E-B014-4DB6-B997-D208F5026FE9}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{0FA0E57E-B014-4DB6-B997-D208F5026FE9} = {EAAD4164-141B-4484-B4D2-F0A6DCFA2CE2}
 	EndGlobalSection
 EndGlobal
