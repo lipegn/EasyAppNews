@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <projetos>
+    <Projeto>Default</Projeto>
+    <Caminho>http://10.176.17.2:8090/wbsacessobanco/clsacessobanco.asmx</Caminho>
+  </projetos>
+  <TipoConexao>
+    <TipoAcesso>AcessoDireto</TipoAcesso>
+  </TipoConexao>
+  <DadosConexao>
+    <Servidor>ambrsaosql5\sql5</Servidor>
+  </DadosConexao>
+</NewDataSet>

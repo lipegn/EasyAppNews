@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EasyAppNewsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="tblBloco">
+          <Key>
+            <PropertyRef Name="CodBloco" />
+          </Key>
+          <Property Name="CodBloco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodTipoBloco" Type="int" Nullable="false" />
+          <Property Name="CodAssociacao" Type="int" Nullable="false" />
+          <Property Name="DescBloco" Type="varchar" MaxLength="200" />
+          <Property Name="Data" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Ordem" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEnquete">
+          <Key>
+            <PropertyRef Name="CodEnquete" />
+          </Key>
+          <Property Name="CodEnquete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodEnqueteTipo" Type="int" Nullable="false" />
+          <Property Name="DescEnquete" Type="varchar" MaxLength="200" />
+          <Property Name="PerguntaEnquete" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="FlagAtivo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEnqueteResposta">
+          <Key>
+            <PropertyRef Name="CodEnqueteResposta" />
+          </Key>
+          <Property Name="CodEnqueteResposta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodEnquete" Type="int" Nullable="false" />
+          <Property Name="CodResposta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEnqueteRespostaUsuario">
+          <Key>
+            <PropertyRef Name="CodEnqueteRespostaUsuario" />
+          </Key>
+          <Property Name="CodEnqueteRespostaUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodEnquete" Type="int" Nullable="false" />
+          <Property Name="CodResposta" Type="int" Nullable="false" />
+          <Property Name="CodUsuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEnqueteTipo">
+          <Key>
+            <PropertyRef Name="CodEnqueteTipo" />
+          </Key>
+          <Property Name="CodEnqueteTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescEnqueteTipo" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblNoticia">
+          <Key>
+            <PropertyRef Name="CodNoticia" />
+          </Key>
+          <Property Name="CodNoticia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodNoticiaTipo" Type="int" Nullable="false" />
+          <Property Name="TituloNoticia" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="DescNoticia" Type="text" Nullable="false" />
+          <Property Name="FlagAtivo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblNoticiaImagem">
+          <Key>
+            <PropertyRef Name="CodNoticiaImagem" />
+          </Key>
+          <Property Name="CodNoticiaImagem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodNoticia" Type="int" Nullable="false" />
+          <Property Name="CaminhoImagem" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblNoticiaTipo">
+          <Key>
+            <PropertyRef Name="CodNoticiaTipo" />
+          </Key>
+          <Property Name="CodNoticiaTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescNoticiaTipo" Type="varchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblResposta">
+          <Key>
+            <PropertyRef Name="CodResposta" />
+          </Key>
+          <Property Name="CodResposta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescResposta" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblTipoBloco">
+          <Key>
+            <PropertyRef Name="CodTipoBLoco" />
+          </Key>
+          <Property Name="CodTipoBLoco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DescTipoBloco" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblBloco_tblTipoBloco">
+          <End Role="tblTipoBloco" Type="Self.tblTipoBloco" Multiplicity="1" />
+          <End Role="tblBloco" Type="Self.tblBloco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoBloco">
+              <PropertyRef Name="CodTipoBLoco" />
+            </Principal>
+            <Dependent Role="tblBloco">
+              <PropertyRef Name="CodTipoBloco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnquete_tblEnqueteTipo">
+          <End Role="tblEnqueteTipo" Type="Self.tblEnqueteTipo" Multiplicity="1" />
+          <End Role="tblEnquete" Type="Self.tblEnquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEnqueteTipo">
+              <PropertyRef Name="CodEnqueteTipo" />
+            </Principal>
+            <Dependent Role="tblEnquete">
+              <PropertyRef Name="CodEnqueteTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteResposta_tblEnquete">
+          <End Role="tblEnquete" Type="Self.tblEnquete" Multiplicity="1" />
+          <End Role="tblEnqueteResposta" Type="Self.tblEnqueteResposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEnquete">
+              <PropertyRef Name="CodEnquete" />
+            </Principal>
+            <Dependent Role="tblEnqueteResposta">
+              <PropertyRef Name="CodEnquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteResposta_tblResposta">
+          <End Role="tblResposta" Type="Self.tblResposta" Multiplicity="1" />
+          <End Role="tblEnqueteResposta" Type="Self.tblEnqueteResposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblResposta">
+              <PropertyRef Name="CodResposta" />
+            </Principal>
+            <Dependent Role="tblEnqueteResposta">
+              <PropertyRef Name="CodResposta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteRespostaUsuario_tblEnquete">
+          <End Role="tblEnquete" Type="Self.tblEnquete" Multiplicity="1" />
+          <End Role="tblEnqueteRespostaUsuario" Type="Self.tblEnqueteRespostaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEnquete">
+              <PropertyRef Name="CodEnquete" />
+            </Principal>
+            <Dependent Role="tblEnqueteRespostaUsuario">
+              <PropertyRef Name="CodEnquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteRespostaUsuario_tblResposta">
+          <End Role="tblResposta" Type="Self.tblResposta" Multiplicity="1" />
+          <End Role="tblEnqueteRespostaUsuario" Type="Self.tblEnqueteRespostaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblResposta">
+              <PropertyRef Name="CodResposta" />
+            </Principal>
+            <Dependent Role="tblEnqueteRespostaUsuario">
+              <PropertyRef Name="CodResposta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblNoticia_tblNoticiaTipo">
+          <End Role="tblNoticiaTipo" Type="Self.tblNoticiaTipo" Multiplicity="1" />
+          <End Role="tblNoticia" Type="Self.tblNoticia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNoticiaTipo">
+              <PropertyRef Name="CodNoticiaTipo" />
+            </Principal>
+            <Dependent Role="tblNoticia">
+              <PropertyRef Name="CodNoticiaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EasyAppNewsModelStoreContainer">
+          <EntitySet Name="tblBloco" EntityType="Self.tblBloco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEnquete" EntityType="Self.tblEnquete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEnqueteResposta" EntityType="Self.tblEnqueteResposta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEnqueteRespostaUsuario" EntityType="Self.tblEnqueteRespostaUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEnqueteTipo" EntityType="Self.tblEnqueteTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNoticia" EntityType="Self.tblNoticia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNoticiaImagem" EntityType="Self.tblNoticiaImagem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblNoticiaTipo" EntityType="Self.tblNoticiaTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblResposta" EntityType="Self.tblResposta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTipoBloco" EntityType="Self.tblTipoBloco" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblBloco_tblTipoBloco" Association="Self.FK_tblBloco_tblTipoBloco">
+            <End Role="tblTipoBloco" EntitySet="tblTipoBloco" />
+            <End Role="tblBloco" EntitySet="tblBloco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnquete_tblEnqueteTipo" Association="Self.FK_tblEnquete_tblEnqueteTipo">
+            <End Role="tblEnqueteTipo" EntitySet="tblEnqueteTipo" />
+            <End Role="tblEnquete" EntitySet="tblEnquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteResposta_tblEnquete" Association="Self.FK_tblEnqueteResposta_tblEnquete">
+            <End Role="tblEnquete" EntitySet="tblEnquete" />
+            <End Role="tblEnqueteResposta" EntitySet="tblEnqueteResposta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteResposta_tblResposta" Association="Self.FK_tblEnqueteResposta_tblResposta">
+            <End Role="tblResposta" EntitySet="tblResposta" />
+            <End Role="tblEnqueteResposta" EntitySet="tblEnqueteResposta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteRespostaUsuario_tblEnquete" Association="Self.FK_tblEnqueteRespostaUsuario_tblEnquete">
+            <End Role="tblEnquete" EntitySet="tblEnquete" />
+            <End Role="tblEnqueteRespostaUsuario" EntitySet="tblEnqueteRespostaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteRespostaUsuario_tblResposta" Association="Self.FK_tblEnqueteRespostaUsuario_tblResposta">
+            <End Role="tblResposta" EntitySet="tblResposta" />
+            <End Role="tblEnqueteRespostaUsuario" EntitySet="tblEnqueteRespostaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNoticia_tblNoticiaTipo" Association="Self.FK_tblNoticia_tblNoticiaTipo">
+            <End Role="tblNoticiaTipo" EntitySet="tblNoticiaTipo" />
+            <End Role="tblNoticia" EntitySet="tblNoticia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EasyAppNewsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="tblBloco">
+          <Key>
+            <PropertyRef Name="CodBloco" />
+          </Key>
+          <Property Name="CodBloco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodTipoBloco" Type="Int32" Nullable="false" />
+          <Property Name="CodAssociacao" Type="Int32" Nullable="false" />
+          <Property Name="DescBloco" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Ordem" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblTipoBloco" Relationship="Self.FK_tblBloco_tblTipoBloco" FromRole="tblBloco" ToRole="tblTipoBloco" />
+        </EntityType>
+        <EntityType Name="tblEnquete">
+          <Key>
+            <PropertyRef Name="CodEnquete" />
+          </Key>
+          <Property Name="CodEnquete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodEnqueteTipo" Type="Int32" Nullable="false" />
+          <Property Name="DescEnquete" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PerguntaEnquete" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FlagAtivo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblEnqueteTipo" Relationship="Self.FK_tblEnquete_tblEnqueteTipo" FromRole="tblEnquete" ToRole="tblEnqueteTipo" />
+          <NavigationProperty Name="tblEnqueteResposta" Relationship="Self.FK_tblEnqueteResposta_tblEnquete" FromRole="tblEnquete" ToRole="tblEnqueteResposta" />
+          <NavigationProperty Name="tblEnqueteRespostaUsuario" Relationship="Self.FK_tblEnqueteRespostaUsuario_tblEnquete" FromRole="tblEnquete" ToRole="tblEnqueteRespostaUsuario" />
+        </EntityType>
+        <EntityType Name="tblEnqueteResposta">
+          <Key>
+            <PropertyRef Name="CodEnqueteResposta" />
+          </Key>
+          <Property Name="CodEnqueteResposta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodEnquete" Type="Int32" Nullable="false" />
+          <Property Name="CodResposta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblEnquete" Relationship="Self.FK_tblEnqueteResposta_tblEnquete" FromRole="tblEnqueteResposta" ToRole="tblEnquete" />
+          <NavigationProperty Name="tblResposta" Relationship="Self.FK_tblEnqueteResposta_tblResposta" FromRole="tblEnqueteResposta" ToRole="tblResposta" />
+        </EntityType>
+        <EntityType Name="tblEnqueteRespostaUsuario">
+          <Key>
+            <PropertyRef Name="CodEnqueteRespostaUsuario" />
+          </Key>
+          <Property Name="CodEnqueteRespostaUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodEnquete" Type="Int32" Nullable="false" />
+          <Property Name="CodResposta" Type="Int32" Nullable="false" />
+          <Property Name="CodUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblEnquete" Relationship="Self.FK_tblEnqueteRespostaUsuario_tblEnquete" FromRole="tblEnqueteRespostaUsuario" ToRole="tblEnquete" />
+          <NavigationProperty Name="tblResposta" Relationship="Self.FK_tblEnqueteRespostaUsuario_tblResposta" FromRole="tblEnqueteRespostaUsuario" ToRole="tblResposta" />
+        </EntityType>
+        <EntityType Name="tblEnqueteTipo">
+          <Key>
+            <PropertyRef Name="CodEnqueteTipo" />
+          </Key>
+          <Property Name="CodEnqueteTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescEnqueteTipo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEnquete" Relationship="Self.FK_tblEnquete_tblEnqueteTipo" FromRole="tblEnqueteTipo" ToRole="tblEnquete" />
+        </EntityType>
+        <EntityType Name="tblNoticia">
+          <Key>
+            <PropertyRef Name="CodNoticia" />
+          </Key>
+          <Property Name="CodNoticia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodNoticiaTipo" Type="Int32" Nullable="false" />
+          <Property Name="TituloNoticia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescNoticia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FlagAtivo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblNoticiaTipo" Relationship="Self.FK_tblNoticia_tblNoticiaTipo" FromRole="tblNoticia" ToRole="tblNoticiaTipo" />
+        </EntityType>
+        <EntityType Name="tblNoticiaImagem">
+          <Key>
+            <PropertyRef Name="CodNoticiaImagem" />
+          </Key>
+          <Property Name="CodNoticiaImagem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodNoticia" Type="Int32" Nullable="false" />
+          <Property Name="CaminhoImagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblNoticiaTipo">
+          <Key>
+            <PropertyRef Name="CodNoticiaTipo" />
+          </Key>
+          <Property Name="CodNoticiaTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescNoticiaTipo" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblNoticia" Relationship="Self.FK_tblNoticia_tblNoticiaTipo" FromRole="tblNoticiaTipo" ToRole="tblNoticia" />
+        </EntityType>
+        <EntityType Name="tblResposta">
+          <Key>
+            <PropertyRef Name="CodResposta" />
+          </Key>
+          <Property Name="CodResposta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescResposta" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblEnqueteResposta" Relationship="Self.FK_tblEnqueteResposta_tblResposta" FromRole="tblResposta" ToRole="tblEnqueteResposta" />
+          <NavigationProperty Name="tblEnqueteRespostaUsuario" Relationship="Self.FK_tblEnqueteRespostaUsuario_tblResposta" FromRole="tblResposta" ToRole="tblEnqueteRespostaUsuario" />
+        </EntityType>
+        <EntityType Name="tblTipoBloco">
+          <Key>
+            <PropertyRef Name="CodTipoBLoco" />
+          </Key>
+          <Property Name="CodTipoBLoco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DescTipoBloco" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblBloco" Relationship="Self.FK_tblBloco_tblTipoBloco" FromRole="tblTipoBloco" ToRole="tblBloco" />
+        </EntityType>
+        <Association Name="FK_tblBloco_tblTipoBloco">
+          <End Role="tblTipoBloco" Type="Self.tblTipoBloco" Multiplicity="1" />
+          <End Role="tblBloco" Type="Self.tblBloco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTipoBloco">
+              <PropertyRef Name="CodTipoBLoco" />
+            </Principal>
+            <Dependent Role="tblBloco">
+              <PropertyRef Name="CodTipoBloco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnquete_tblEnqueteTipo">
+          <End Role="tblEnqueteTipo" Type="Self.tblEnqueteTipo" Multiplicity="1" />
+          <End Role="tblEnquete" Type="Self.tblEnquete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEnqueteTipo">
+              <PropertyRef Name="CodEnqueteTipo" />
+            </Principal>
+            <Dependent Role="tblEnquete">
+              <PropertyRef Name="CodEnqueteTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteResposta_tblEnquete">
+          <End Role="tblEnquete" Type="Self.tblEnquete" Multiplicity="1" />
+          <End Role="tblEnqueteResposta" Type="Self.tblEnqueteResposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEnquete">
+              <PropertyRef Name="CodEnquete" />
+            </Principal>
+            <Dependent Role="tblEnqueteResposta">
+              <PropertyRef Name="CodEnquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteRespostaUsuario_tblEnquete">
+          <End Role="tblEnquete" Type="Self.tblEnquete" Multiplicity="1" />
+          <End Role="tblEnqueteRespostaUsuario" Type="Self.tblEnqueteRespostaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEnquete">
+              <PropertyRef Name="CodEnquete" />
+            </Principal>
+            <Dependent Role="tblEnqueteRespostaUsuario">
+              <PropertyRef Name="CodEnquete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteResposta_tblResposta">
+          <End Role="tblResposta" Type="Self.tblResposta" Multiplicity="1" />
+          <End Role="tblEnqueteResposta" Type="Self.tblEnqueteResposta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblResposta">
+              <PropertyRef Name="CodResposta" />
+            </Principal>
+            <Dependent Role="tblEnqueteResposta">
+              <PropertyRef Name="CodResposta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblEnqueteRespostaUsuario_tblResposta">
+          <End Role="tblResposta" Type="Self.tblResposta" Multiplicity="1" />
+          <End Role="tblEnqueteRespostaUsuario" Type="Self.tblEnqueteRespostaUsuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblResposta">
+              <PropertyRef Name="CodResposta" />
+            </Principal>
+            <Dependent Role="tblEnqueteRespostaUsuario">
+              <PropertyRef Name="CodResposta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblNoticia_tblNoticiaTipo">
+          <End Role="tblNoticiaTipo" Type="Self.tblNoticiaTipo" Multiplicity="1" />
+          <End Role="tblNoticia" Type="Self.tblNoticia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblNoticiaTipo">
+              <PropertyRef Name="CodNoticiaTipo" />
+            </Principal>
+            <Dependent Role="tblNoticia">
+              <PropertyRef Name="CodNoticiaTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EasyAppNewsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblBloco" EntityType="Self.tblBloco" />
+          <EntitySet Name="tblEnquete" EntityType="Self.tblEnquete" />
+          <EntitySet Name="tblEnqueteResposta" EntityType="Self.tblEnqueteResposta" />
+          <EntitySet Name="tblEnqueteRespostaUsuario" EntityType="Self.tblEnqueteRespostaUsuario" />
+          <EntitySet Name="tblEnqueteTipo" EntityType="Self.tblEnqueteTipo" />
+          <EntitySet Name="tblNoticia" EntityType="Self.tblNoticia" />
+          <EntitySet Name="tblNoticiaImagem" EntityType="Self.tblNoticiaImagem" />
+          <EntitySet Name="tblNoticiaTipo" EntityType="Self.tblNoticiaTipo" />
+          <EntitySet Name="tblResposta" EntityType="Self.tblResposta" />
+          <EntitySet Name="tblTipoBloco" EntityType="Self.tblTipoBloco" />
+          <AssociationSet Name="FK_tblBloco_tblTipoBloco" Association="Self.FK_tblBloco_tblTipoBloco">
+            <End Role="tblTipoBloco" EntitySet="tblTipoBloco" />
+            <End Role="tblBloco" EntitySet="tblBloco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnquete_tblEnqueteTipo" Association="Self.FK_tblEnquete_tblEnqueteTipo">
+            <End Role="tblEnqueteTipo" EntitySet="tblEnqueteTipo" />
+            <End Role="tblEnquete" EntitySet="tblEnquete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteResposta_tblEnquete" Association="Self.FK_tblEnqueteResposta_tblEnquete">
+            <End Role="tblEnquete" EntitySet="tblEnquete" />
+            <End Role="tblEnqueteResposta" EntitySet="tblEnqueteResposta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteRespostaUsuario_tblEnquete" Association="Self.FK_tblEnqueteRespostaUsuario_tblEnquete">
+            <End Role="tblEnquete" EntitySet="tblEnquete" />
+            <End Role="tblEnqueteRespostaUsuario" EntitySet="tblEnqueteRespostaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteResposta_tblResposta" Association="Self.FK_tblEnqueteResposta_tblResposta">
+            <End Role="tblResposta" EntitySet="tblResposta" />
+            <End Role="tblEnqueteResposta" EntitySet="tblEnqueteResposta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblEnqueteRespostaUsuario_tblResposta" Association="Self.FK_tblEnqueteRespostaUsuario_tblResposta">
+            <End Role="tblResposta" EntitySet="tblResposta" />
+            <End Role="tblEnqueteRespostaUsuario" EntitySet="tblEnqueteRespostaUsuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblNoticia_tblNoticiaTipo" Association="Self.FK_tblNoticia_tblNoticiaTipo">
+            <End Role="tblNoticiaTipo" EntitySet="tblNoticiaTipo" />
+            <End Role="tblNoticia" EntitySet="tblNoticia" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EasyAppNewsModelStoreContainer" CdmEntityContainer="EasyAppNewsEntities">
+          <EntitySetMapping Name="tblBloco">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblBloco">
+              <MappingFragment StoreEntitySet="tblBloco">
+                <ScalarProperty Name="CodBloco" ColumnName="CodBloco" />
+                <ScalarProperty Name="CodTipoBloco" ColumnName="CodTipoBloco" />
+                <ScalarProperty Name="CodAssociacao" ColumnName="CodAssociacao" />
+                <ScalarProperty Name="DescBloco" ColumnName="DescBloco" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Ordem" ColumnName="Ordem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEnquete">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblEnquete">
+              <MappingFragment StoreEntitySet="tblEnquete">
+                <ScalarProperty Name="CodEnquete" ColumnName="CodEnquete" />
+                <ScalarProperty Name="CodEnqueteTipo" ColumnName="CodEnqueteTipo" />
+                <ScalarProperty Name="DescEnquete" ColumnName="DescEnquete" />
+                <ScalarProperty Name="PerguntaEnquete" ColumnName="PerguntaEnquete" />
+                <ScalarProperty Name="FlagAtivo" ColumnName="FlagAtivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEnqueteResposta">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblEnqueteResposta">
+              <MappingFragment StoreEntitySet="tblEnqueteResposta">
+                <ScalarProperty Name="CodEnqueteResposta" ColumnName="CodEnqueteResposta" />
+                <ScalarProperty Name="CodEnquete" ColumnName="CodEnquete" />
+                <ScalarProperty Name="CodResposta" ColumnName="CodResposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEnqueteRespostaUsuario">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblEnqueteRespostaUsuario">
+              <MappingFragment StoreEntitySet="tblEnqueteRespostaUsuario">
+                <ScalarProperty Name="CodEnqueteRespostaUsuario" ColumnName="CodEnqueteRespostaUsuario" />
+                <ScalarProperty Name="CodEnquete" ColumnName="CodEnquete" />
+                <ScalarProperty Name="CodResposta" ColumnName="CodResposta" />
+                <ScalarProperty Name="CodUsuario" ColumnName="CodUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEnqueteTipo">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblEnqueteTipo">
+              <MappingFragment StoreEntitySet="tblEnqueteTipo">
+                <ScalarProperty Name="CodEnqueteTipo" ColumnName="CodEnqueteTipo" />
+                <ScalarProperty Name="DescEnqueteTipo" ColumnName="DescEnqueteTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNoticia">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblNoticia">
+              <MappingFragment StoreEntitySet="tblNoticia">
+                <ScalarProperty Name="CodNoticia" ColumnName="CodNoticia" />
+                <ScalarProperty Name="CodNoticiaTipo" ColumnName="CodNoticiaTipo" />
+                <ScalarProperty Name="TituloNoticia" ColumnName="TituloNoticia" />
+                <ScalarProperty Name="DescNoticia" ColumnName="DescNoticia" />
+                <ScalarProperty Name="FlagAtivo" ColumnName="FlagAtivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNoticiaImagem">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblNoticiaImagem">
+              <MappingFragment StoreEntitySet="tblNoticiaImagem">
+                <ScalarProperty Name="CodNoticiaImagem" ColumnName="CodNoticiaImagem" />
+                <ScalarProperty Name="CodNoticia" ColumnName="CodNoticia" />
+                <ScalarProperty Name="CaminhoImagem" ColumnName="CaminhoImagem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblNoticiaTipo">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblNoticiaTipo">
+              <MappingFragment StoreEntitySet="tblNoticiaTipo">
+                <ScalarProperty Name="CodNoticiaTipo" ColumnName="CodNoticiaTipo" />
+                <ScalarProperty Name="DescNoticiaTipo" ColumnName="DescNoticiaTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblResposta">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblResposta">
+              <MappingFragment StoreEntitySet="tblResposta">
+                <ScalarProperty Name="CodResposta" ColumnName="CodResposta" />
+                <ScalarProperty Name="DescResposta" ColumnName="DescResposta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTipoBloco">
+            <EntityTypeMapping TypeName="EasyAppNewsModel.tblTipoBloco">
+              <MappingFragment StoreEntitySet="tblTipoBloco">
+                <ScalarProperty Name="CodTipoBLoco" ColumnName="CodTipoBLoco" />
+                <ScalarProperty Name="DescTipoBloco" ColumnName="DescTipoBloco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

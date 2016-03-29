@@ -39,11 +39,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dllAcessoWeb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dlls\dllAcessoWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -150,12 +156,61 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EasyAppNewsController.cs" />
+    <Compile Include="DB\AppNewsDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppNewsDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\AppNewsDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\AppNewsDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppNewsDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DB\Exec.cs" />
+    <Compile Include="DB\tblBloco.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblEnquete.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblEnqueteResposta.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblEnqueteRespostaUsuario.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblEnqueteTipo.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblNoticia.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblNoticiaImagem.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblNoticiaTipo.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblResposta.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DB\tblTipoBloco.cs">
+      <DependentUpon>AppNewsDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\CaminhoWS.xml" />
+    <Content Include="Dlls\CaminhoWS.xml" />
+    <Content Include="Dlls\dllAcessoWeb.dll" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -167,10 +222,33 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DB\AppNewsDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AppNewsDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\AppNewsDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AppNewsDataModel.edmx</DependentUpon>
+      <LastGenOutput>AppNewsDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DB\AppNewsDataModel.edmx.diagram">
+      <DependentUpon>AppNewsDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DB\AppNewsDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AppNewsDataModel.edmx</DependentUpon>
+      <LastGenOutput>AppNewsDataModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

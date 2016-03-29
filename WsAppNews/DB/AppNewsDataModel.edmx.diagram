@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="83157e5570624272a329903f572345ec" Name="Diagram1">
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblBloco" Width="1.5" PointX="8" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblEnquete" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblEnqueteResposta" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblEnqueteRespostaUsuario" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblEnqueteTipo" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblNoticia" Width="1.5" PointX="10" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblNoticiaImagem" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblNoticiaTipo" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblResposta" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EasyAppNewsModel.tblTipoBloco" Width="1.5" PointX="5.75" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblBloco_tblTipoBloco" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblEnquete_tblEnqueteTipo" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblEnqueteResposta_tblEnquete" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblEnqueteRespostaUsuario_tblEnquete" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblEnqueteResposta_tblResposta" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblEnqueteRespostaUsuario_tblResposta" ManuallyRouted="false" />
+        <AssociationConnector Association="EasyAppNewsModel.FK_tblNoticia_tblNoticiaTipo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
