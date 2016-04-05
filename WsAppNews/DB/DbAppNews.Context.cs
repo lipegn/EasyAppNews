@@ -15,8 +15,8 @@ namespace WsAppNews.DB
     
     public partial class EasyAppNewsEntities : DbContext
     {
-        public EasyAppNewsEntities(string strConn)
-            : base(strConn)
+        public EasyAppNewsEntities()
+            : base("name=EasyAppNewsEntities")
         {
         }
     

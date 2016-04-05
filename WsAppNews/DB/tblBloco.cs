@@ -21,6 +21,6 @@ namespace WsAppNews.DB
         public System.DateTime Data { get; set; }
         public int Ordem { get; set; }
     
-        public virtual tblTipoBloco tblTipoBloco { get; set; }
+        public tblTipoBloco tblTipoBloco { get; set; }
     }
 }

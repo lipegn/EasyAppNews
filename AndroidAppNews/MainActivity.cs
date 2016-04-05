@@ -5,26 +5,38 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Collections;
 
 namespace AndroidAppNews
 {
     [Activity(Label = "AndroidAppNews", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            TableRow lst = FindViewById<TableRow>(Resource.Id.tableRow1);
+            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WrapContent, TableRow.LayoutParams.WrapContent);
+            lst.LayoutParameters = layoutParams;
+            
+            //ImageView view = FindViewById<ImageView>(Resource.Id.imageView1);
+            var lista = Exec.GetBlocos();
+
+            //view.SetImageBitmap(Exec.GetImageBitmapFromUrl("http://s2.glbimg.com/cU0RjFCFZgZkALNL-50TmFDF2EU=/360x171/top/http://s2.glbimg.com/Mb9v4NUokoAgBWZ7OMyhs3BocAc=/26x85:570x343/544x258/s.glbimg.com/jo/g1/f/original/2015/08/24/cadu_1.jpg"));
+
+            foreach (var item in lista)
+            {
+                ImageView img = new ImageView(this);
+                img.SetImageBitmap(Exec.GetImageBitmapFromUrl("http://s2.glbimg.com/cU0RjFCFZgZkALNL-50TmFDF2EU=/360x171/top/http://s2.glbimg.com/Mb9v4NUokoAgBWZ7OMyhs3BocAc=/26x85:570x343/544x258/s.glbimg.com/jo/g1/f/original/2015/08/24/cadu_1.jpg"));
+                //img.set
+                //img.Height = 90;
+                img.SetScaleType(Android.Widget.ImageView.ScaleType.FitCenter);
+                img.ScrollTo(0, 0);
+                lst.AddView(img);                
+            }
         }
     }
 }
